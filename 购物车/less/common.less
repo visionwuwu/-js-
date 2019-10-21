@@ -1,0 +1,52 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html{
+    font-size: 20px;
+    height: 100%;
+}
+
+body{
+    height: 100%;
+    color: #606266;
+    font-size: 0.7rem;
+    font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+}
+
+ul{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+    font-family: inherit;
+    color: inherit; 
+}
+button{
+    color: inherit;
+    font-size: inherit;
+    font-family: inherit;
+    appearance: none;
+    border: none;
+}
+button:focus{
+    outline: none;
+}
+img{
+    display: block;
+}
+a img{
+    border: none;
+}
+
+.clearFix::after{
+    content: '';
+    display: block;
+    height: 0;
+    visibility: hidden;
+    clear: both;
+}

@@ -1,0 +1,55 @@
+@font-face {
+  font-family: 'rate';
+  src:
+    url('../fonts/rate.ttf') format('truetype'),
+    url('../fonts/rate.woff') format('woff'),
+    url('../fonts/rate.svg#rate') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* rate css */
+.rate,
+.rate *{
+  display: inline-block;
+  vertical-align: middle;
+}
+.rate{
+  margin-right: 30px;
+  user-select: none;
+}
+.rate ul{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  margin-right: 20px;
+}
+.rate li{
+  padding: 5px;
+  font-family: 'rate';
+  cursor: pointer;
+  vertical-align: top;
+}
+.rate.readonly li{
+  cursor: default;
+}
+.rate.star li.full-on::before{
+  content: '\e9d9';
+}
+.rate.star li.half-on::before{
+  content: '\e9d8';
+}
+.rate.star li.off::before{
+  content: '\e9d7';
+}
+.rate.smile li.full-on::before{
+  content: '\e9e2';
+}
+.rate.smile li.half-on::before{
+  content: '\e900';
+}
+.rate.smile li.off::before{
+  content: '\e9e1';
+}
+
+

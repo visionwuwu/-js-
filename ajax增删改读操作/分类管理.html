@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/cate.css">
+    <link rel="stylesheet" href="css/paging.css">
+</head>
+
+<body>
+
+    <div class="page">
+        <h2>文章类别</h2>
+        <ul id="menu">
+            <li>正在加载中...</li>
+        </ul>
+        <div class="pager" id="pager1"></div>
+
+    </div>
+
+    <div class="page">
+        <h2 id="title">添加分类</h2>
+        <ul id="form">
+            <li><label>名称：</label><input id="sname" type="text" placeholder="请输入名称"></li>
+            <li><label>排序：</label><input id="orderid" type="text" placeholder="请输入排序号码"></li>
+        </ul>
+        <button id="savebtn" class="primary">新增</button>
+        <button id="resetbtn">重填</button>
+    </div>
+
+    <script src="js/fetch.js"></script>
+    <script src="js/paging.js"></script>
+
+
+    <script>
+        //调用演示
+        var baseURL = 'http://jx-tongan.com/vueapi/';
+        var menu = document.getElementById('menu');
+        var title = document.getElementById('title');
+        var sname = document.getElementById('sname');
+        var orderid = document.getElementById('orderid');
+        var savebtn = document.getElementById('savebtn');
+        var resetbtn = document.getElementById('resetbtn');
+
+        //读取数据
+        show();
+
+        var flag = true;
+        var p = 1;
+        var perpage = 5;
+
+        function render(page, data) {
+            // 分页数据算法
+            var start = (page - 1) * perpage;
+            var end = start + perpage;
+            var newData = data.slice(start, end);
+            var temp = newData.reduce(function(prev, next) {
+                return prev + `
+      <li data-id="${next.id}">
+        ${next.name}
+        <button class="primary edit">修改</button>
+        <button class="danger del">删除</button>
+      </li>
+    `;
+            }, '')
+            menu.innerHTML = temp;
+        }
+
+        function show() {
+            $.get(baseURL + 'get_cate_list.php', function(data) {
+
+                if (p > Math.ceil(data.length / perpage)) {
+                    p = Math.ceil(data.length / perpage)
+                }
+
+                render(p, data)
+
+                lhPage('pager1', {
+                    page: p,
+                    perpage: perpage,
+                    total: data.length,
+                    callback: function(page) {
+                        p = page;
+                        render(page, data)
+                    }
+                });
+            })
+        }
+
+        //删除和修改按钮
+        menu.onclick = function(e) {
+
+            var btn = e.target;
+            if (btn.tagName != 'BUTTON') return;
+            var li = btn.parentNode;
+
+            //修改
+            if (btn.classList.contains('edit')) {
+
+                title.innerText = '修改分类';
+                savebtn.innerText = '保存';
+
+                sname.focus();
+                $.get(baseURL + 'get_cate_cont.php', {
+                    id: li.dataset.id
+                }, function(data) {
+                    savebtn.dataset.id = data[0].id;
+                    sname.value = data[0].name;
+                    orderid.value = data[0].orderid;
+                })
+
+            }
+
+            //删除
+            if (btn.classList.contains('del')) {
+
+                $.get(baseURL + 'del_cate.php', {
+                    id: li.dataset.id
+                }, function(data) {
+                    //删除成功！
+                    if (data[0].code == 200) {
+                        // li.remove();
+                        show();
+                    }
+                })
+
+            }
+
+        }
+
+
+        //添加和修改
+        savebtn.onclick = function() {
+
+            var snameVal = sname.value.trim();
+            var orderidVal = orderid.value.trim();
+            if (snameVal == '') {
+                alert('请输入名称！');
+                sname.focus();
+                return false;
+            }
+            if (orderidVal == '') {
+                alert('请输入排序号码！');
+                orderid.focus();
+                return false;
+            }
+            if (/\D/.test(orderidVal)) {
+                alert('请输入数字！');
+                orderid.focus();
+                return false;
+            }
+
+            if (this.innerText == '新增') {
+                $.post(baseURL + 'add_cate.php', {
+                    pid: 0,
+                    name: snameVal,
+                    orderid: orderidVal
+                }, function(data) {
+                    show();
+                    clear(); //清空表单
+                })
+            }
+
+            if (this.innerText == '保存') {
+
+                $.post(baseURL + 'edit_cate.php', {
+                    id: this.dataset.id,
+                    name: snameVal,
+                    orderid: orderidVal
+                }, function(data) {
+                    show();
+                    title.innerText = '添加分类';
+                    savebtn.innerText = '新增';
+                    clear();
+                })
+
+            }
+
+        }
+
+        //清空
+        function clear() {
+            sname.value = '';
+            orderid.value = '';
+            sname.focus();
+        }
+
+        //重填
+
+        resetbtn.onclick = function() {
+            clear();
+        }
+    </script>

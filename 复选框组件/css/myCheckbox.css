@@ -1,0 +1,67 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.checkboxGroup {
+    font-size: 14px;
+    font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif;
+}
+
+.checkboxGroup input[type="checkbox"] {
+    display: none;
+}
+
+.checkboxGroup label {
+    margin-right: 30px;
+    cursor: pointer;
+}
+
+.checkboxGroup label .checkbox_input {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    vertical-align: middle;
+}
+
+.checkboxGroup label .checkbox_input::after {
+    content: '√';
+    color: #fff;
+    font-size: 12px;
+    visibility: hidden;
+}
+
+.checkboxGroup label .checkbox_value {
+    display: inline-block;
+    padding-left: 10px;
+    vertical-align: middle;
+    color: #606266;
+}
+
+
+/* 当前选中时的样式 */
+
+.checkboxGroup label.checked input[type="checkbox"]:checked~.checkbox_value {
+    color: #00aeff;
+}
+
+.checkboxGroup label.checked input[type="checkbox"]:checked+span {
+    border-color: #00aeff;
+    background-color: #00aeff;
+}
+
+.checkboxGroup label.checked input[type="checkbox"]:checked+span.checkbox_input::after {
+    visibility: visible;
+}
+
+
+/* 禁用的样式 */
+
+.checkboxGroup label.disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}

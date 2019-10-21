@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/myCheckbox.css">
+    <script src="js/myCheckbox.js"></script>
+</head>
+
+<body>
+
+    <div id="checkbox" style="text-align: center;padding-top: 50px;">
+    </div>
+    <div id="checkbox1" style="text-align: center;padding-top: 50px;">
+    </div>
+    <div id="checkbox2" style="text-align: center;padding-top: 50px;">
+    </div>
+
+    <script>
+        // 不禁用
+        myCheckbox('checkbox', {
+            value: [], // 绑定的选中value值
+            name: 'hobbies', // checkbox原生name属性值
+            innerText: ['钓鱼', '听歌', '和朋友谈天说地'], // 每个复选框对应的value值
+            // disabled: true, // 是否全部禁用
+            // forbidden: [1, 2], // 禁用第几个
+            callback: function(bindvalue) {
+                console.log(bindvalue)
+            }
+        })
+
+        // 全部禁用
+        myCheckbox('checkbox1', {
+            value: [], // 绑定的选中value值
+            name: 'hobbies', // checkbox原生name属性值
+            innerText: ['钓鱼', '听歌', '和朋友谈天说地'], // 每个复选框对应的value值
+            disabled: true, // 是否全部禁用
+            forbidden: [1, 2], // 禁用第几个
+            callback: function(bindvalue) {
+                console.log(bindvalue)
+            }
+        })
+
+        // 禁用某项
+        myCheckbox('checkbox2', {
+            value: [], // 绑定的选中value值
+            name: 'hobbies', // checkbox原生name属性值
+            innerText: ['钓鱼', '听歌', '和朋友谈天说地'], // 每个复选框对应的value值
+            // disabled: true, // 是否全部禁用
+            forbidden: [1, 3], // 禁用第几个
+            callback: function(bindvalue) {
+                console.log(bindvalue)
+            }
+        })
+    </script>
+
+</body>
+
+</html>

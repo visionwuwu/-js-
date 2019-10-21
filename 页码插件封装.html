@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .pager {
+            padding: 60px 20px;
+            text-align: center;
+            user-select: none;
+        }
+        
+        .pager ul {
+            display: inline-block;
+            vertical-align: top;
+            list-style: none;
+            margin-top: 0;
+            margin-bottom: 0;
+            padding-left: 0;
+            overflow: hidden;
+        }
+        
+        .pager ul li {
+            position: relative;
+            float: left;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            margin-left: -1px;
+        }
+        
+        .pager ul li:first-child {
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+            margin-left: 0;
+        }
+        
+        .pager ul li:last-child {
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+        
+        .pager ul li:hover {
+            border-color: #666;
+            z-index: 10;
+        }
+        
+        .pager ul li.active {
+            background-color: rgb(0, 119, 255);
+            color: white;
+            border-color: rgb(0, 119, 255);
+            z-index: 5;
+        }
+        
+        .pager ul li.disabled {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="pager" class="pager">
+    </div>
+
+    <div id="pager1" class="pager">
+    </div>
+
+
+    <script type="text/javascript">
+        ;
+        (function() {
+
+            var DEFAULTS = {
+                page: 1,
+                perpage: 5
+            }
+
+            // 我的分页
+            var myPage = function(selector, config) {
+
+                    // 分页四要素
+
+                    var page = config.page || DEFAULTS.page // 当前页
+
+                    var perpage = config.perpage || DEFAULTS.perpage // 每页多少页数
+
+                    var totalPage = config.totalPage ? config.totalPage : (Math.ceil(config.total / perpage)) // 总页数
+
+                    var total = config.totalPage ? (perpage * totalPage) : config.total // 总数据数
+
+                    var target = document.getElementById(selector)
+
+                    showPage(page)
+
+                    // 渲染模板
+
+                    function showPage(currentPage) {
+
+                        // 定义模板
+                        var tmp = ''
+
+                        // 分页算法
+
+                        var start = currentPage - Math.ceil(perpage / 2)
+
+                        var end = currentPage + Math.ceil(perpage / 2)
+
+
+                        if (currentPage <= perpage) {
+
+                            start = 2
+
+                            end = perpage
+                        }
+
+                        if (currentPage > (totalPage - perpage)) {
+
+                            start = totalPage - perpage
+
+                            end = totalPage - 1
+                        }
+
+
+                        // 默认第一页和左快进显示
+
+                        tmp += `
+                <ul><li class="${(currentPage == 1) ? 'active' : ''}" data-id="1">1</li>
+                <li class="${(currentPage <= perpage) ? 'disabled' : ''}" id="back" data-id="${currentPage}">«</li>
+            `
+                            // 遍历显示的页数
+
+                        for (var i = start; i <= end; i++) {
+
+                            tmp += `
+                         <li class="${(currentPage == i) ? 'active' : ''}"  data-id="${i}">${i}</li>  
+                    `
+                        }
+
+
+                        // 最后一页显示和右快进显示
+
+                        tmp += `
+                        <li class="${(currentPage > (totalPage - perpage)) ? 'disabled' : ''}" id="go" data-id="${currentPage}">»</li>
+                        <li class="${currentPage == totalPage ? 'active' : ''}" data-id="${totalPage}">${totalPage}</li>
+                        `;
+
+                        // 添加到模板中
+
+                        target.innerHTML = tmp
+
+                    }
+
+
+                    // 点击页码实现切换
+
+                    target.addEventListener('click', function(ev) {
+
+                        var ev = ev.target || window.event.srcElement
+
+                        var index = Number(ev.dataset.id)
+
+                        if (isNaN(index)) return;
+
+                        // 如果是快退
+                        if (ev.id == 'back') {
+
+                            return showPage(index - perpage)
+                        }
+
+                        if (ev.id == 'go') {
+                            return showPage(index + perpage)
+                        }
+
+                        // 切换当前页码
+
+                        showPage(index)
+
+                        // callback 回调函数留一个接口
+
+                        config.callback && config.callback(index)
+
+                    }, false)
+
+                }
+                // 暴露给window
+            window.myPage = myPage
+        })()
+
+
+
+        // 调用此插件
+        myPage('pager', {
+            page: 1, //当前页
+            perpage: 5, // 每页页码数
+            total: 50, // 总数据数
+            totalPage: 10, //总页数
+            callback: function(page) {
+                console.log('当前页' + page)
+            }
+        })
+
+        myPage('pager1', {
+            page: 1, //当前页
+            perpage: 5, // 每页页码数
+            total: 50, // 总数据数
+            totalPage: 10, //总页数
+            callback: function(page) {
+                console.log('当前页' + page)
+            }
+        })
+    </script>
+</body>
+
+</html>

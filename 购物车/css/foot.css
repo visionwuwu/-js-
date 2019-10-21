@@ -1,0 +1,59 @@
+.cart_footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2.25rem;
+  line-height: 2.25rem;
+  background: #514f4f;
+  display: flex;
+}
+.cart_footer .order {
+  position: relative;
+  flex: 1;
+  padding-left: 63px;
+}
+.cart_footer .order .cart_box {
+  position: relative;
+  left: 9px;
+  top: -16px;
+  width: 48px;
+  height: 48px;
+  background: #fed061;
+  position: absolute;
+  border-radius: 50%;
+}
+.cart_footer .order .cart_box .totalNum {
+  position: absolute;
+  right: 7px;
+  top: -4px;
+  background-color: #fe0000;
+  min-width: 15px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  color: #fff;
+  border-radius: 5px;
+}
+.cart_footer .order .totalMoney {
+  color: #c4c3c3;
+}
+.cart_footer .order .totalMoney p:nth-child(1) {
+  height: 30px;
+  line-height: 30px;
+  font-size: 1rem;
+}
+.cart_footer .order .totalMoney p:nth-child(2) {
+  height: 15px;
+  line-height: 15px;
+  font-size: 12px;
+}
+.cart_footer .order .totalMoney .sellPrice {
+  margin-left: 7px;
+}
+.cart_footer .pay {
+  width: 5rem;
+  height: 100%;
+  background: #fed061;
+  color: #333;
+}

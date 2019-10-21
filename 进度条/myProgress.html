@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/myProgress.css">
+    <script src="js/myProgress.js"></script>
+</head>
+
+<body>
+
+
+
+    <div class="box1"></div>
+    <div class="box2"></div>
+    <div class="box3"></div>
+
+    <script>
+        myProgress('.box1', {
+            value: 0.5,
+            type: 'decimal',
+            callback: function(value) {
+                console.log(value)
+            }
+        })
+        myProgress('.box2', {
+            value: 99,
+            type: 'num',
+            callback: function(value) {
+                console.log(value)
+            }
+        })
+        myProgress('.box3', {
+            value: 0.3,
+            type: 'percentage',
+            callback: function(value) {
+                console.log(value)
+            }
+        })
+    </script>
+
+</body>
+
+</html>

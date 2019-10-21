@@ -1,0 +1,51 @@
+* {
+    box-sizing: border-box;
+}
+
+.pager {
+    padding: 10px;
+    text-align: center;
+    user-select: none;
+}
+
+.pager button {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    margin-left: -1px;
+}
+
+.pager button.disabled {
+    opacity: .6;
+    outline: none;
+    cursor: not-allowed;
+}
+
+.pager button:first-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    padding-top: 4px;
+    padding-left: 4px;
+    margin-left: 0;
+}
+
+.pager button:last-child {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    padding-top: 4px;
+    padding-left: 4px;
+}
+
+.pager button:not(.disabled):hover {
+    border-color: #666;
+    z-index: 10;
+}
+
+.pager button.active {
+    background-color: rgb(0, 119, 255);
+    color: white;
+    border-color: rgb(0, 119, 255);
+    z-index: 5;
+}

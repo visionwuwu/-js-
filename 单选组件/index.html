@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/myRadio.css">
+    <script src="js/myRadio.js"></script>
+</head>
+
+<body>
+
+    <div id="radio" style="text-align:center; padding-top: 100px;">
+    </div>
+
+    <div id="radio1" style="text-align:center; padding-top: 100px;">
+    </div>
+
+    <div id="radio2" style="text-align:center; padding-top: 100px;">
+    </div>
+
+    <script>
+        myRadio('radio', {
+            value: '',
+            name: 'gender',
+            innerText: ['哈哈', '嘻嘻'],
+            radioNum: 4,
+            disabled: true, //全部禁用
+            // forbidden: [1, 3] // 选择哪几个启用
+            callback: function(data) {
+                console.log(data)
+            }
+        })
+
+        myRadio('radio1', {
+            value: '',
+            name: 'gender',
+            innerText: ['哈哈q', '嘻嘻w'],
+            radioNum: 2,
+            // disabled: true, //全部禁用
+            forbidden: [1, 3], // 选择哪几个启用,
+            callback: function(data) {
+                console.log(data)
+            }
+        })
+
+        myRadio('radio2', {
+            value: '',
+            name: 'gender',
+            innerText: ['哈哈q', '嘻嘻w', 'fds', 'fsf'],
+            radioNum: 5,
+            callback: function(data) {
+                console.log(data)
+            }
+
+            // disabled: true, //全部禁用
+            // forbidden: [1, 3] // 选择哪几个启用
+        })
+    </script>
+</body>
+
+</htm

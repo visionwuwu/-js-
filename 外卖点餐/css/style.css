@@ -1,0 +1,227 @@
+/* css reset */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+html,
+body {
+    background-color: #5d5d5d;
+}
+
+body {
+    font-family: "microsoft yahei";
+    font-size: 1.4rem;
+    color: #363636;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a img {
+    border: none;
+}
+
+button,
+input {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+
+/* css layout */
+
+.container {
+    max-width: 360px;
+    min-height: 100vh;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #fff;
+}
+
+
+/* banner css */
+
+.banner {
+    height: 120px;
+    background-color: rgb(54, 150, 240);
+}
+
+.banner h2 {
+    padding: 20px;
+    font-size: 20px;
+    color: white;
+    font-weight: normal;
+}
+
+
+/* tab css */
+
+.tab-nav {
+    overflow: hidden;
+}
+
+.tab-nav>li {
+    float: left;
+    width: 33.33333333%;
+    text-align: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.tab-nav>li:hover {
+    color: #000;
+}
+
+.tab-nav>li.active {
+    color: #ff6600;
+    padding-bottom: 11px;
+    border-bottom-width: 2px;
+    border-bottom-color: #ff6600;
+}
+
+.tab-panel {
+    display: none;
+    height: calc(100vh - 164px);
+}
+
+.tab-panel p.info {
+    font-size: 1.8rem;
+    padding: 20px;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+
+/* goods */
+
+.goods {
+    position: relative;
+}
+
+.goods .cate {
+    position: absolute;
+    top: 0;
+    width: 90px;
+    height: 100%;
+    background-color: #eee;
+    z-index: 999;
+}
+
+.goods .cate li {
+    padding: 14px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+}
+
+.goods .cate li.active {
+    background-color: #fff;
+}
+
+.goods .list {
+    position: relative;
+    padding-left: 90px;
+    height: 100%;
+    overflow: auto;
+}
+
+.goods .list::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.goods .list::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, .2);
+    border-radius: 3px;
+}
+
+.goods .list h4 {
+    font-weight: normal;
+    padding: 4px 10px;
+    background-color: #eee;
+}
+
+.goods .list ol li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    overflow: hidden;
+}
+
+.goods .list ol li img {
+    float: left;
+    border: 1px solid #ddd;
+}
+
+.goods .list ol li p {
+    padding: 5px 10px;
+    float: left;
+}
+
+.goods .list ol li p b {
+    color: #ff6600;
+    font-weight: normal;
+}
+
+.goods .list ol li span {
+    float: right;
+    margin-top: 15px;
+}
+
+.number {
+    display: inline-block;
+    overflow: hidden;
+    user-select: none;
+}
+
+.number a,
+.number input {
+    float: left;
+}
+
+.number a {
+    width: 20px;
+    line-height: 20px;
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #666;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.number input {
+    width: 40px;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    text-align: center;
+}
+
+.number a:first-child {
+    transition: all .6s ease;
+}
+
+.number.zero a:first-child {
+    transform: translateX(60px) rotate(360deg);
+    opacity: 0;
+    visibility: hidden;
+}
+
+.number.zero input {
+    visibility: hidden;
+}

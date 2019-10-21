@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>外卖点餐</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="banner">
+            <h2>老龚外卖</h2>
+        </div>
+
+        <div class="tab">
+
+            <ul class="tab-nav">
+                <li>商品</li>
+                <li>店家</li>
+                <li>评论</li>
+            </ul>
+
+            <div class="tab-panel goods">
+
+            </div>
+
+            <div class="tab-panel">
+                <p class="info">店家信息</p>
+            </div>
+
+            <div class="tab-panel">
+                <p class="info">评论信息</p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="js/tab.js"></script>
+    <script src="js/goods.js"></script>
+    <script src="js/number.js"></script>
+
+    <script>
+        var info = [{
+            id: 1,
+            name: '饮料',
+            children: [{
+                id: 11,
+                src: 'images/goods1.jpg',
+                title: '芬达',
+                price: 3,
+                num: 0
+            }, {
+                id: 12,
+                src: 'images/goods2.jpg',
+                title: '可乐',
+                price: 2.5,
+                num: 0
+            }, {
+                id: 13,
+                src: 'images/goods3.jpg',
+                title: '雪碧',
+                price: 3,
+                num: 0
+            }]
+        }, {
+            id: 2,
+            name: '水果',
+            children: [{
+                id: 21,
+                src: 'images/goods4.jpg',
+                title: '香蕉',
+                price: 3,
+                num: 0
+            }, {
+                id: 22,
+                src: 'images/goods5.jpg',
+                title: '芒果',
+                price: 7,
+                num: 0
+            }, {
+                id: 23,
+                src: 'images/goods6.jpg',
+                title: '苹果',
+                price: 6,
+                num: 0
+            }]
+        }, {
+            id: 3,
+            name: '冷冻食品',
+            children: [{
+                id: 31,
+                src: 'images/goods7.jpg',
+                title: '速冻饺子',
+                price: 10,
+                num: 0
+            }, {
+                id: 32,
+                src: 'images/goods8.jpg',
+                title: '北美冻虾',
+                price: 30,
+                num: 0
+            }, {
+                id: 33,
+                src: 'images/goods9.jpg',
+                title: '烧麦',
+                price: 10,
+                num: 0
+            }, {
+                id: 34,
+                src: 'images/goods10.jpg',
+                title: '汤圆',
+                price: 5,
+                num: 0
+            }]
+        }, {
+            id: 4,
+            name: '猪肉',
+            children: [{
+                id: 41,
+                src: 'images/goods11.jpg',
+                title: '五花肉',
+                price: 25,
+                num: 0
+            }, {
+                id: 42,
+                src: 'images/goods12.jpg',
+                title: '上等肋排',
+                price: 35,
+                num: 0
+            }, {
+                id: 43,
+                src: 'images/goods13.jpg',
+                title: '土猪肉',
+                price: 15,
+                num: 0
+            }, {
+                id: 44,
+                src: 'images/goods14.jpg',
+                title: '猪肝',
+                price: 15,
+                num: 0
+            }]
+        }, ]
+
+        //购物车
+        var mycart = [];
+        if (localStorage.getItem('mycart')) {
+            mycart = JSON.parse(localStorage.getItem('mycart'));
+        }
+
+
+        window.onload = function() {
+
+            //标签初始化
+            gTab('.tab', {
+                change: function(li, index) {
+                    console.log(li, index);
+                }
+            });
+
+            //商品初始化
+            goods('.goods', info, {
+
+            });
+
+            //数字输入框初始化
+            number('.number', {
+                change: function(val, goods) {
+                    // console.log( val, goods );
+
+                    //判断是否存在相同的商品
+                    var isExist = mycart.some(function(item) {
+                        return item.id == goods.id;
+                    })
+
+                    if (isExist) {
+                        //存在修改数量
+                        mycart = mycart.map(function(item) {
+                            if (item.id == goods.id) {
+                                item.num += 1;
+                            }
+                            return item;
+                        })
+
+                    } else {
+                        goods.num = 1;
+                        mycart.push(goods);
+
+                    }
+
+                    //保存到本地存储
+                    localStorage.setItem('mycart', JSON.stringify(mycart));
+
+                }
+            });
+
+        }
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  .clock{
+    display: inline-block;
+    position: relative;
+  }
+  .clock b{
+    position: absolute;
+    background-color: #000;
+  }
+  .clock .needle{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+  }
+  .clock .needle{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .clock .needle li{
+    position: absolute;
+    height: 4px;
+    left: 50%;
+    top: 50%;
+    margin-top: -2px;
+    transform-origin: 0 50%;
+    clip-path: polygon(0 0,100% 50%,0 100%);
+  }
+  .clock .needle li.h{
+    width: 30%;
+    background-color: red;
+  }
+  .clock .needle li.i{
+    width: 40%;
+    background-color: green;
+  }
+  .clock .needle li.s{
+    width: 50%;
+    background-color: blue;
+  }
+  </style>
+</head>
+<body>
+
+  <div id="clock1">
+    
+  </div>
+  <div id="clock2">
+   
+  </div>
+
+  <script>
+
+  makeClock( 'clock1',{
+    cw: 200,
+    ch: 200
+  } );
+  
+  makeClock( 'clock2', {
+    cw: 300,
+    ch: 300
+  });
+  
+  function makeClock( id, config ){
+
+    //默认参数
+    var DEFAULTS = {
+      cw: 400, //表宽
+      ch: 400, //表高
+      mw: 3, //刻度宽度
+      mh: 6, //刻度高度
+      mha: 12 //突出刻度 
+    }
+
+    //合并参数（默认参数和用户参数合并）
+    var options = Object.assign( {}, DEFAULTS, config );
+
+    //解构参数变量
+    var { cw, ch, mw, mh, mha } = options;
+
+    var cr = ch/2; //表圆盘半径
+
+    //定义模板
+    var temp = '';
+
+    //将刻度左偏移使得整个居中
+    var cleft = cr-mw/2;
+
+    for(var i=0;i<60;i++){
+      temp += `<b style="
+      width:${mw}px;
+      height:${i%5?mh:mha}px;
+      transform-origin: 50% ${cr}px;
+      transform: translateX(${cleft}px) 
+      rotate(${i*6}deg);">
+      </b>`;
+    }
+
+    temp += `<ul class="needle"></ul>`;
+
+    var target = document.getElementById( id );
+    target.classList.add('clock');
+    target.style.cssText = `width:${cw}px;height:${ch}px;`;
+
+    target.innerHTML = temp;
+
+    //表的指针对象（内包含 时针、分针、秒针）
+    var needle = target.querySelector('.needle');
+
+    //运行时钟
+    runClock( needle );
+    setInterval(function(){
+      runClock( needle );
+    },1000)
+
+  }
+  
+
+  //时间运行
+  function runClock( target ){
+
+    var now = new Date();
+    var H = now.getHours(); //时
+    var _H = H * 30 - 90; //时针的角度
+
+    var I = now.getMinutes(); //分
+    var _I = I * 6 - 90; //分针的角度
+
+    var S = now.getSeconds(); //秒
+    var _S = S * 6 - 90; //秒针的角度
+    
+    var temp = `
+      <li class="h" style="transform:rotate(${_H}deg);"></li>
+      <li class="i" style="transform:rotate(${_I}deg);"></li>
+      <li class="s" style="transform:rotate(${_S}deg);"></li>
+    `;
+
+    target.innerHTML = temp;
+
+  }
+
+  
+
+
+  </script>
+
+
+
+</body>
+</html>

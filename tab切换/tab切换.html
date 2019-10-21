@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/myTab.css">
+    <script src="js/myTab.js"></script>
+</head>
+
+<body>
+
+    <div class="tab_box" id="tab">
+        <nav class="tab_nav">
+            <a href="javascript:;" class="active">公司新闻<span class="close">✘</span></a>
+            <a href="javascript:;">行业行为<span class="close">✘</span></a>
+            <a href="javascript:;">公司环境<span class="close">✘</span></a>
+            <span class="tab_add">✚</span>
+        </nav>
+        <div class="tab_content">
+            <div class="tab_pane now">公司新闻</div>
+            <div class="tab_pane">行业行为</div>
+            <div class="tab_pane">公司环境</div>
+        </div>
+    </div>
+
+
+    <div class="tab_box" id="tab1">
+        <nav class="tab_nav hot">
+            <a href="javascript:;" class="active">公司新闻</a>
+            <a href="javascript:;">行业行为</a>
+            <a href="javascript:;">公司环境</a>
+        </nav>
+        <div class="tab_content">
+            <div class="tab_pane now">公司新闻</div>
+            <div class="tab_pane">行业行为</div>
+            <div class="tab_pane">公司环境</div>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            showTab('#tab')
+            showTab('#tab1')
+        }
+    </script>
+
+</body>
+
+</html>

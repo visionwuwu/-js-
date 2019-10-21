@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            background-color: #ccc;
+            padding: 0 10px;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        #dome1 {
+            position: relative;
+            display: inline-block;
+        }
+        
+        #dome1 ul li {
+            width: 150px;
+            position: absolute;
+            padding: 10px;
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 0 4px rgba(0, 0, 0, .6);
+            transition: transform .3s ease;
+        }
+        
+        #dome1 ul li:hover {
+            transform: translateY(-10px);
+        }
+        
+        #dome1 li img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="dome1">
+        <ul>
+        </ul>
+    </div>
+
+    <script src="js/common.js"></script>
+    <script>
+        var data = [{
+            title: '图片1',
+            src: 'images/1.jpg'
+        }, {
+            title: '图片2',
+            src: 'images/2.jpg'
+        }, {
+            title: '图片3',
+            src: 'images/3.jpg'
+        }, {
+            title: '图片4',
+            src: 'images/4.jpg'
+        }, {
+            title: '图片5',
+            src: 'images/5.jpg'
+        }, {
+            title: '图片6',
+            src: 'images/6.jpg'
+        }, {
+            title: '图片7',
+            src: 'images/7.jpg'
+        }, {
+            title: '图片8',
+            src: 'images/8.jpg'
+        }, {
+            title: '图片9',
+            src: 'images/1.jpg'
+        }, {
+            title: '图片10',
+            src: 'images/2.jpg'
+        }, {
+            title: '图片11',
+            src: 'images/3.jpg'
+        }, {
+            title: '图片12',
+            src: 'images/4.jpg'
+        }, {
+            title: '图片13',
+            src: 'images/5.jpg'
+        }, {
+            title: '图片14',
+            src: 'images/6.jpg'
+        }, {
+            title: '图片15',
+            src: 'images/7.jpg'
+        }, {
+            title: '图片16',
+            src: 'images/8.jpg'
+        }, {
+            title: '图片17',
+            src: 'images/9.jpg'
+        }, {
+            title: '图片18',
+            src: 'images/10.jpg'
+        }, {
+            title: '图片19',
+            src: 'images/11.jpg'
+        }, {
+            title: '图片20',
+            src: 'images/1.jpg'
+        }, {
+            title: '图片21',
+            src: 'images/2.jpg'
+        }, {
+            title: '图片22',
+            src: 'images/3.jpg'
+        }, {
+            title: '图片23',
+            src: 'images/4.jpg'
+        }, {
+            title: '图片24',
+            src: 'images/5.jpg'
+        }, {
+            title: '图片25',
+            src: 'images/6.jpg'
+        }, {
+            title: '图片26',
+            src: 'images/7.jpg'
+        }, {
+            title: '图片26',
+            src: 'images/8.jpg'
+        }, {
+            title: '图片26',
+            src: 'images/1.jpg'
+        }, {
+            title: '图片26',
+            src: 'images/2.jpg'
+        }, {
+            title: '图片26',
+            src: 'images/3.jpg'
+        }, {
+            title: '图片26',
+            src: 'images/4.jpg'
+        }, {
+            title: '图片26',
+            src: 'images/5.jpg'
+        }, {
+            title: '图片26',
+            src: 'images/6.jpg'
+        }, {
+            title: '图片26',
+            src: 'images/7.jpg'
+        }, {
+            title: '图片26',
+            src: 'images/8.jpg'
+        }, {
+            title: '图片26',
+            src: 'images/9.jpg'
+        }, {
+            title: '图片26',
+            src: 'images/10.jpg'
+        }, {
+            title: '图片26',
+            src: 'images/11.jpg'
+        }, {
+            title: '图片26',
+            src: 'images/7.jpg'
+        }, {
+            title: '图片26',
+            src: 'images/8.jpg'
+        }, {
+            title: '图片26',
+            src: 'images/9.jpg'
+        }, {
+            title: '图片26',
+            src: 'images/10.jpg'
+        }, {
+            title: '图片26',
+            src: 'images/11.jpg'
+        }]
+
+        // 根据数据渲染列表
+        function renderList() {
+            var ulObj = document.querySelector('#dome1 ul');
+            // 创建一个代码片段
+            var fragments = document.createDocumentFragment();
+            for (let i = 0; i < data.length; i++) {
+                // 创建一个li标签
+                var liObj = document.createElement('li');
+                // 创建一个a标签
+                var aObj = document.createElement('a');
+                // 设置href属性
+                aObj.href = '#';
+                // 创建一个ing标签
+                var imgObj = document.createElement('img');
+                // 设置图片的src属性
+                imgObj.src = data[i].src;
+                imgObj.title = data[i].title
+
+                aObj.appendChild(imgObj);
+                liObj.appendChild(aObj);
+                // 包裹元素
+                fragments.appendChild(liObj)
+            }
+            ulObj.appendChild(fragments)
+        }
+        renderList()
+        window.onload = function() {
+            waterFall()
+        }
+
+        // 屏幕大小改变重新排列布局
+        window.onresize = function() {
+            waterFall()
+        }
+
+        // 瀑布流代码
+        function waterFall() {
+            // 获取所有的li
+            var liObjs = document.querySelectorAll('#dome1 ul li');
+            // 间隙
+            var gap = 20;
+            // 获取页面的实际宽度
+            var pageW = parseInt(window.getComputedStyle(document.body, null).width);
+            // 计算多少列 pageW / (图片的宽度 + gap)
+            var colunms = Math.floor(pageW / (liObjs[0].offsetWidth + gap));
+            // 每行每个的高度
+            var arr = [];
+            for (var i = 0; i < liObjs.length; i++) {
+                if (i < colunms) {
+                    //设置第一行每个li的top好left值
+                    liObjs[i].style.top = 0 + 'px';
+                    var left = i == 0 ? 0 : (i * liObjs[i].offsetWidth + gap * i)
+                    liObjs[i].style.left = left + 'px';
+                    arr.push(liObjs[i].offsetHeight);
+                } else {
+                    // 求出每列最小高度和索引
+                    var min = arr[0]
+                    var index = 0;
+                    // 计算最小高度
+                    for (var j = 0; j < arr.length; j++) {
+                        if (arr[j] < min) {
+                            // 最小高度
+                            min = arr[j];
+                            // 最小高度索引
+                            index = j;
+                        }
+                    }
+                    // 设置第下行第一个的left和top值
+
+                    animate(liObjs[i], {
+                        'top': arr[index] + gap,
+                        'left': liObjs[index].offsetLeft
+                    });
+                    // 改变当前最小列的高度 当前元素的高度 + gap + 当前列的上一个offsetTop
+                    arr[index] = arr[index] + gap + liObjs[i].offsetHeight
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

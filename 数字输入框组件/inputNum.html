@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 引入数字输入框css代码 -->
+    <link rel="stylesheet" href="css/inputNum.css">
+    <!-- 引入数字输入框js代码 -->
+    <script src="js/inputNum.js"></script>
+</head>
+
+<body>
+    <div id="input" style="text-align: center;display: inline-block;margin: 0 15px;padding-top: 100px;"></div>
+    <div id="input2" style="text-align: center;display: inline-block;margin: 0 15px;"></div>
+    <div id="input3" style="text-align: center;display: inline-block;margin: 0 15px;"></div>
+    <div id="input4" style="text-align: center;display: inline-block;margin: 0 15px;"></div>
+</body>
+
+<script>
+    //大号
+    inputNumber('input', {
+        size: 'lager',
+        value: 1,
+        max: 30,
+        min: 1,
+        callback: function(data) {
+            console.log(data)
+        }
+    })
+
+    // 中等
+    inputNumber('input2', {
+        size: 'medium',
+        value: 1,
+        max: 30,
+        min: 1,
+        step: 3,
+        disabled: true,
+        callback: function(data) {
+            console.log(data)
+        }
+    })
+
+    // 小号
+    inputNumber('input3', {
+        size: 'small',
+        value: 1,
+        max: 30,
+        min: 1,
+        step: 2,
+        callback: function(data) {
+            console.log(data)
+        }
+    })
+
+    // mini
+    inputNumber('input4', {
+        size: 'mini',
+        value: 1,
+        max: 30,
+        min: 1,
+        step: 4,
+        callback: function(data) {
+            console.log(data)
+        }
+    })
+</script>
+
+</html>

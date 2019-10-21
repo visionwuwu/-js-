@@ -1,0 +1,123 @@
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    /* box-sizing: border-box; */
+}
+
+button {
+    border: none;
+    background: none;
+}
+
+input {
+    border: none;
+    outline: none;
+    appearance: none;
+}
+
+button:focus {
+    outline: none;
+}
+
+
+/* 数字输入框组件样式 */
+
+.input_number {
+    display: inline-block;
+    border: 1px solid #dcdfe6;
+    border-radius: 4px;
+    transition: border .3s ease;
+    overflow: hidden;
+}
+
+.input_number:hover {
+    border-color: #409eff;
+}
+
+.input_number button {
+    background-color: #f5f7fa;
+    color: #606266;
+    cursor: pointer;
+    transition: color .3s ease;
+}
+
+.input_number button:hover {
+    color: #409eff;
+}
+
+.input_number input[type="text"] {
+    color: #000;
+    text-align: center;
+    cursor: pointer;
+    border-left: 1px solid #dcdfe6;
+    border-right: 1px solid#dcdfe6;
+}
+
+
+/* 数字输入框禁用时 */
+
+.input_number.disabled {
+    opacity: .6;
+    cursor: not-allowed !important;
+}
+
+.input_number.disabled:hover {
+    border-color: #dcdfe6;
+}
+
+.input_number button.btn_disabled {
+    cursor: not-allowed;
+}
+
+.input_number.disabled button,
+.input_number.disabled input {
+    cursor: not-allowed;
+}
+
+.input_number.disabled button:hover {
+    color: #606266;
+}
+
+
+/* 数字输入框组件样式 */
+
+.input_number.lager button {
+    min-width: 40px;
+    line-height: 40px;
+}
+
+.input_number.lager input[type="text"] {
+    width: 96px;
+    line-height: 40px;
+}
+
+.input_number.medium button {
+    min-width: 36px;
+    line-height: 36px;
+}
+
+.input_number.medium input[type="text"] {
+    width: 122px;
+    line-height: 36px;
+}
+
+.input_number.small button {
+    min-width: 32px;
+    line-height: 32px;
+}
+
+.input_number.small input[type="text"] {
+    width: 60px;
+    line-height: 32px;
+}
+
+.input_number.mini button {
+    min-width: 28px;
+    line-height: 28px;
+}
+
+.input_number.mini input[type="text"] {
+    width: 68px;
+    line-height: 28px;
+}

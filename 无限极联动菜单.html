@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style>
+	#box select{
+		padding: 8px 10px;
+		font-family: inherit;
+		font-size: inherit;
+		border-radius: 4px;
+		border: 1px solid #ccc;
+		outline: none;
+		margin-right: 10px;
+	}
+	</style>
+</head>
+<body>
+
+<h1>无限极多级联动菜单</h1>
+
+<div id="box">
+
+</div>
+<button id="btn">取值</button>
+<script>
+var	cityList = [
+		{
+			name:'江西省',
+			list:[
+				{ 
+          name:'南昌市',
+          list:[
+					 {name:'青山湖区',list: [
+						 	{	name:'湖坊'	},
+						 	{ name:'塘山'},
+							{ name:'京东'}
+						 ]
+						},
+					 {name:'高新区',list: [
+						 { name:'昌东镇'},
+						 { name:'麻丘镇'},
+						 { name:'艾溪湖管理处'}
+						]
+						},
+					 {
+						 name:'东湖区',
+						 list: [
+						 	{name:'董家窑街道'},
+						 	{name:'彭家桥街道'}
+						]
+					}
+				 ]},
+				{name:'上饶市',list: [
+					{ name:'信州区'},
+					{ name:'德兴区'},
+					{ name:'上饶县'}
+				] },
+				{name:'九江市',list: [
+					{name:'沙河区'},
+					{name:'浔阳区'}
+				] }
+			]
+		},
+		{
+			name:'浙江省',
+			list:[
+				{name:'温州市', list:[
+					{ name:'鹿城区' },
+					{ name:'新城区' },
+					{ name:'龙湾区' }
+				]},
+				{name:'杭州市', list:[
+					{ name:'上城区' },
+					{ name:'下城区' },
+					{ name:'西湖区' }
+				]}
+			]
+		},
+		{
+			name:'湖北省',
+			list:[
+				{name:'武汉市', list:[
+					{name:'武昌区'},
+					{name:'汉口区'},
+					{name:'汉阳区'}
+				]},
+				{name:'黄石市', list:[
+					{name:'下陆区'},
+					{name:'阳新县'},
+					{name:'下陆区'}
+				]}
+			]
+		}
+]
+
+treeSelect( 'box', cityList, '江西省/南昌市/青山湖区/湖坊' );
+
+function treeSelect( id, data, value ){
+	// if(value){
+	// 	var svalue = value.split('/');
+	// 	var len = svalue.lenght
+	// 	while(len){
+	// 		var select = document.createElement('select');
+	// 		  var option = document.createElement('option');
+	// 		  option.textContent = '请选择';
+	// 		  option.value = '';
+	// 		  select.appendChild( option );
+	// 		  for(var i=0; i < data.length; i++ ){
+	// 		    option = document.createElement('option');
+	// 		    option.value = data[i].name;
+	// 		    option.textContent = data[i].name;
+	// 		    select.appendChild( option );
+	// 		  }
+	// 		len--
+	// 	}
+
+	// }
+
+  var select = document.createElement('select');
+  var option = document.createElement('option');
+  option.textContent = '请选择';
+  option.value = '';
+  select.appendChild( option );
+  for(var i=0; i < data.length; i++ ){
+    option = document.createElement('option');
+    option.value = data[i].name;
+    option.textContent = data[i].name;
+    select.appendChild( option );
+  }
+
+  //事件
+  select.onchange = function(){
+		//如果有下select就删除下一个
+		while( this.nextElementSibling  ){
+			this.nextElementSibling.remove();
+		}
+
+		if ( this.selectedIndex==0 ) return;
+
+    var index = this.selectedIndex - 1;
+    arr.push(this.children[index + 1].value)
+		var list = data[index].list;
+		if(list && list.length){
+			//显示新的select
+			treeSelect( id, list, value )
+		}
+  }
+
+  var target = document.getElementById( id );
+
+	
+  target.appendChild( select );
+
+	return select;
+
+}
+var arr = []
+document.getElementById('btn').onclick = function(){
+	var valArr = []
+	var box = document.getElementById('box')
+	var childs = box.children
+	for(var i = 0; i < childs.length; i++){
+		var selectedIndex = childs[i].selectedIndex
+		var val = childs[i].children[selectedIndex].value
+		if(val){
+			valArr.push(val)
+		}
+	}
+	console.log(valArr.join('/')) 
+}
+
+
+
+</script>
+
+</body>
+</html>

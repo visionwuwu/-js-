@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  :root {
+    --range-width: 400px;
+    --range-height: 40px;
+  }
+  .range {
+    position: relative;
+    display: inline-block;
+    width: var(--range-width);
+    height: var(--range-height);
+    line-height: var(--range-height);
+    text-align: center;
+    background-color: #ddd;
+    font-size: 14px;
+    color: #333;
+    /* border: 5px solid red; */
+  }
+  .range::after{
+  	content: '请按住滑块，拖动到最右边';
+  	position: absolute;
+  	width: 100%;
+  	left: 0;
+  	top: 0;
+  	height: 100%;
+  	text-align: center;
+  	z-index: 1;
+  }
+  .range.finsh::after{
+  	content: '验证通过';
+  	color: #fff;
+  }
+  .range i {
+    position: absolute;
+    text-align: center;
+    width: var(--range-height);
+    height: var(--range-height);
+    line-height: var(--range-height);
+    color: #fff;
+    font-size: 20px;
+    background-color: #999;
+    left: 0;
+    z-index: 2;    
+  }
+  .range i:hover{
+  	cursor: grab;
+  }
+
+  .range i:active{
+  	cursor: grabbing;
+  }
+  .range b {
+  	text-align: center;
+  	position: absolute;
+  	z-index: 0;
+  	white-space: nowrap;
+  	overflow: hidden;
+  	left: 0;
+  	top: 0;
+    width: 0;
+    height: var(--range-height);
+    background-color: rgb(14, 209, 89);
+  }
+
+  .range.unfinsh i,.range.unfinsh b{
+    transition: all .6s ease;
+  }
+  </style>
+</head>
+<body>
+
+<span class="range">
+	
+  <i></i>
+  <b></b>
+</span>
+
+<br><br>
+
+<span class="range">
+  <i></i>
+  <b></b>
+</span>
+
+<script>
+var ranges = document.querySelectorAll('.range');
+ranges.forEach(function( range ){
+  
+  range.onmousedown = function( e ){
+  	range.classList.remove('unfinsh')
+
+    var target = e.target;
+    if( target.nodeName != 'I' ) return;
+
+    //拖拽滑动
+    var startLeft = target.offsetLeft;
+    var startX = e.clientX;
+    var maxLeft = this.clientWidth - target.offsetWidth;
+
+    //背景元素
+    var $i = target;
+    var $b = $i.nextElementSibling;
+
+    var left = 0;
+
+    document.onmousemove = function( e ){
+      e.preventDefault();
+      var endX = e.clientX;
+      left = startLeft + ( endX - startX );
+
+      if( left <= 0 ) left = 0;
+      if( left >= maxLeft ) left = maxLeft;
+
+
+      $i.style.left = left + 'px';
+      $b.style.width = left + 'px';
+
+
+    }
+
+    document.onmouseup = function(){
+    	if(left !== maxLeft){
+    		range.classList.add('unfinsh')
+    		$i.style.left = 0 + 'px';
+      		$b.style.width = 0 + 'px';
+    	}else{
+    		range.onmousedown = null
+    		range.classList.add('finsh')
+    		var timeId = setTimeout(function(){
+    			$i.innerText = '✔'
+    			clearTimeout(timeId)
+    		},200)
+    	}
+      document.onmousemove = null;
+      document.onmouseup = null;
+    }
+
+  };
+
+})
+
+</script>
+
+</body>
+</html>

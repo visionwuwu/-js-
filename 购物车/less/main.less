@@ -1,0 +1,157 @@
+.cart_main{
+    padding-top: 127px;
+    padding-bottom: 45px;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    .cart_nav{
+        overflow: auto;
+        ::-webkit-scrollbar{
+            width: 0;
+            background: transparent;
+        }
+        height: 1.8rem;
+        line-height: 1.8rem;
+        background: #fff;
+        display: flex;
+        a{
+            position: relative;
+            flex: 1;
+            color: #333;
+            text-align: center;
+            &.active{
+                color: #fdc84f;
+            }
+            &.active::after{
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 1px;
+                background-color: #fdc84f;
+                box-shadow: 0 0 2px #fde9bc;
+                bottom: 0;
+                left: 0;
+            }
+        }
+    }
+    .cart_content{
+        display: flex;
+        height: 100%;
+        padding-bottom: 1.8rem;
+        .cart_cate{
+            width: 4rem;
+            overflow: auto;
+            &::-webkit-scrollbar{
+                width: 0;
+                background: transparent;
+            }
+            li{
+                position: relative;
+                background: #f4f4f4;
+                border-bottom: 1px solid #ebebeb;
+                line-height: 2.1rem;
+                text-align: center;
+                &.now{
+                    background: #fff;
+                }
+                span{
+                    position: absolute;
+                    min-width: 16px;
+                    height: 16px;
+                    top: 0;
+                    right: 0;
+                    background: #fe0000;
+                    color: #fff;
+                    text-align: center;
+                    line-height: 16px;
+                    border-radius: 50%;
+                    display: none;
+                }
+            }
+        }
+        .cart_list{
+            position: relative;
+            overflow: auto;
+            &::-webkit-scrollbar{
+                width: 0;
+                background: transparent;
+            }
+            flex: 1;
+            .item{
+                position: relative;
+                .tit{
+                    line-height: 1.25rem;
+                    height: 1.25rem;
+                    background: #f4f4f4;
+                    font-size: 0.7rem;
+                }
+                .product{
+                    line-height: 3.05rem;
+                    height: 3.05rem;
+                    display: flex;
+                    border-bottom: 1px solid #eee;
+                    .pro_img{
+                        width: 2.75rem;
+                        img{
+                            width: 100%;
+                        }
+                    }
+                    .pro_info{
+                        flex: 1;
+                        p{
+                            width: 100%;
+                            padding-left: 8px;
+                            height: 30px; 
+                            line-height: 30px; 
+                            color: #575757;
+                            position: relative;
+                            .input_group{
+                                font-style: normal;
+                                position: absolute;
+                                text-align: center;
+                                width: 3.1rem;
+                                right: 13px;
+                                bottom: 0;
+                                &.scroll{
+                                    .sub{
+                                        right: 100%;
+                                        transform: translateX(18px) rotate(0deg);
+                                    }
+                                    b{
+                                        opacity: 1;
+                                    }
+                                }
+                                span{
+                                   position: absolute;
+                                    width: 18px;
+                                    height: 18px;
+                                    border-radius: 50%;
+                                    top: 50%;
+                                    margin-top: -9px;
+                                    border: 2px solid #484a48;
+                                    display: inline-block;
+                                    text-align: center;
+                                    line-height: 12px;
+                                    &.sub{
+                                        right: 0;
+                                        transition: all 1s ease;
+                                        transform: rotate(180deg);
+                                    }
+                                    &.add{
+                                        right: 0;
+                                    }
+                                }
+                                b{
+                                    margin: 0 5px;
+                                    font-weight: normal;
+                                    opacity: 0;
+                                    transition: all 1s ease;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

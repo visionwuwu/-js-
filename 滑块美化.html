@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  :root {
+    --range-width: 400px;
+    --range-height: 40px;
+  }
+  .range {
+    position: relative;
+    display: inline-block;
+    width: var(--range-width);
+    height: var(--range-height);
+    background-color: #ddd;
+    /* border: 5px solid red; */
+  }
+  .range i {
+    position: absolute;
+    width: var(--range-height);
+    height: var(--range-height);
+    background-color: #999;
+    left: 0;
+  }
+  .range b {
+    display: block;
+    width: 0;
+    height: var(--range-height);
+    background-color: rgb(14, 209, 89);
+  }
+  </style>
+</head>
+<body>
+
+<span class="range">
+  <i></i>
+  <b></b>
+</span>
+
+<br><br>
+
+<span class="range">
+  <i></i>
+  <b></b>
+</span>
+
+<script>
+var ranges = document.querySelectorAll('.range');
+ranges.forEach(function( range ){
+  
+  range.onmousedown = function( e ){
+
+    var target = e.target;
+    if( target.nodeName != 'I' ) return;
+
+    //拖拽滑动
+    var startLeft = target.offsetLeft;
+    var startX = e.clientX;
+    var maxLeft = this.clientWidth - target.offsetWidth;
+
+    //背景元素
+    var $i = target;
+    var $b = $i.nextElementSibling;
+
+    document.onmousemove = function( e ){
+
+      e.preventDefault();
+      var endX = e.clientX;
+      var left = startLeft + ( endX - startX );
+
+      if( left <= 0 ) left = 0;
+      if( left >= maxLeft ) left = maxLeft;
+
+      $i.style.left = left + 'px';
+      $b.style.width = left + 'px';
+
+      console.log(  Math.round( (left / maxLeft ) * 255 ) );
+
+    }
+
+    document.onmouseup = function(){
+      document.onmousemove = null;
+      document.onmouseup = null;
+    }
+
+  };
+
+})
+
+
+
+
+</script>
+
+  
+  
+</body>
+</html>

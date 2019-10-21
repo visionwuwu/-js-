@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/jquery.rate.css">
+</head>
+<body>
+	
+
+	<div id="demo1"></div>
+
+	<div id="demo2"></div>
+
+	<script src="js/jquery.js"></script>
+    <script src="js/jquery.rate.js"></script>
+    <script>
+	    $(function(){
+
+		    $('#demo1').rate({
+		      type: 'star',
+		      total: 6,
+		      size: 80,
+		      value: 4.5
+		    });
+
+		    $('#demo2').rate({
+		      type: 'smile',
+		      color: '#247EDAFF',
+		      total: 6,
+		      value: 0,
+		      size: 80,
+		    });
+	    })
+    </script>
+</body>
+</html>

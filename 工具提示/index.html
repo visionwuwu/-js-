@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="tooltip.css">
+  <style>
+  body{
+    padding: 100px;
+  }
+  button{
+    padding: 8px 16px;
+    font-size: 24px;
+    margin-right: 50px;
+  }
+  </style>
+</head>
+<body>
+  
+
+<button id="btn1">✎</button>
+<button id="btn2">✎✎✎✎✎</button>
+<button id="btn3">✎</button>
+<button id="btn4">✎</button>
+
+<!-- <span class="tooltip top">这是编辑按钮</span> -->
+<!-- <span class="tooltip bottom">这是编辑按钮</span> -->
+<!-- <span class="tooltip left">这是编辑按钮</span> -->
+<!-- <span class="tooltip right">这是编辑按钮</span> -->
+
+
+<script src="tooltip.js"></script>
+<script>
+
+var t1 = new Tooltip( '#btn1',{
+  title:'编辑按钮！',
+  placement: 'left'
+});
+// t1.show();
+
+var t2 = new Tooltip( '#btn2',{
+  title: '编辑按钮编辑按钮'
+})
+
+var t3 = new Tooltip( '#btn3',{
+  placement: 'bottom'
+})
+
+var t4 = new Tooltip( '#btn4',{
+  placement: 'right'
+})
+</script>
+
+
+</body>
+</html>

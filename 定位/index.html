@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        #map {
+            width: 800px;
+            height: 500px;
+            background: url(images/map.png) no-repeat center;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            border: 1px solid #ccc;
+            overflow: hidden;
+        }
+        
+        .bicycle {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            z-index: 999;
+        }
+        
+        .zb {
+            width: 20px;
+            height: 30px;
+            position: absolute;
+        }
+        
+        .rangeBox {
+            position: absolute;
+            border: 3px solid red;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <button onclick="createPos()">点击生成随机坐标</button>
+        <button onclick="myPosition()">点击定位我的位置</button>
+        <div id="map">
+        </div>
+    </div>
+
+
+
+    <script>
+        // 地图的宽
+        var mapW = 800
+
+        // 地图的高
+        var mapH = 500
+
+        // 自行车的宽高
+        var cycleW = 25
+        var cycleH = 25
+
+        // 地位坐标尺寸
+        var zbW = 20
+        var zbH = 30
+
+        // 随机数x的取值范围是
+        var x = parseInt(mapW / cycleW) - 1;
+        // Math.ceil((mapH - cycleH) / cycleH)
+        // 随机数y的取值范围
+        var y = parseInt(mapH / cycleH) - 1
+
+        // 随机生成坐标
+        function randomCoordinate() {
+            // 生成坐标的数组
+            var x0 = Math.random() * x
+            var y0 = Math.random() * y
+
+            return {
+                x0,
+                y0
+            }
+        }
+
+        var mapObj = document.getElementById('map') //地图
+
+        var arr = [] // 自行车数据
+
+        function createPos() {
+
+            var num = Number(prompt('随机生成坐标点个数'))
+
+            if (isNaN(num) || num <= 0) return;
+
+            arr.length = 0
+
+            // 先生成num个随机的坐标
+            for (let i = 0; i < num; i++) {
+
+                arr.push(randomCoordinate())
+
+            }
+
+            createCiycle()
+
+        }
+
+
+        function createCiycle() {
+
+            mapObj.innerHTML = ''
+
+            arr.forEach((item, i) => {
+                var imgObj = document.createElement('img');
+
+                imgObj.src = "images/bicycle.png"
+
+                imgObj.className = 'bicycle'
+
+                imgObj.style.left = ((item.x0 * cycleW) - (cycleW / 2)) + 'px'
+
+                imgObj.style.top = ((item.y0 * cycleH) - (cycleH / 2)) + 'px'
+
+                mapObj.appendChild(imgObj)
+
+            })
+
+        }
+
+
+
+        function myPosition() {
+
+            if (arr.length == 0) {
+                alert('当前没有车辆')
+                return;
+            }
+            var myX = Number(prompt('输入我的x轴的位置'))
+            var myY = Number(prompt('输入我的y轴的位置'))
+            var r = Number(prompt('输入半径'))
+
+            if (isNaN(myX) || myX <= 0 || myY <= 0 || isNaN(myY) || r <= 0 || isNaN(r)) {
+                alert('请输入数字')
+                return;
+            }
+
+            console.log(r)
+
+            if (myX > mapW || myX > mapH) {
+                alert('超出范围')
+                return;
+            }
+
+
+            // 坐标
+            var zb = document.createElement('img')
+            zb.classList.add('zb')
+            zb.src = "images/zb.png"
+            zb.style.left = (myX - zbW / 2) + 'px'
+            zb.style.top = (myY - zbH / 2) + 'px'
+
+            // 范围红线
+            var rangeBox = document.createElement('div')
+            rangeBox.classList.add('rangeBox')
+            rangeBox.style.width = 2 * r + 'px'
+            rangeBox.style.height = 2 * r + 'px'
+            rangeBox.style.left = myX - r + 'px'
+            rangeBox.style.top = myY - r + 'px'
+
+            var tmpArr = []
+
+            for (let i = 0; i < arr.length; i++) {
+
+                //a²+b²=c²
+                var a = Math.abs(((arr[i].x0 * cycleW) - myX))
+
+                var b = Math.abs(((arr[i].y0 * cycleH) - myY))
+
+                var c2 = Math.pow(a, 2) + Math.pow(b, 2)
+
+                var c = Math.sqrt(c2)
+
+                if (c <= r) {
+                    tmpArr.push(arr[i])
+                }
+
+            }
+
+            console.log(tmpArr)
+
+            arr = tmpArr
+
+            createCiycle()
+
+            mapObj.appendChild(zb)
+            mapObj.appendChild(rangeBox)
+
+
+        }
+    </script>
+
+</body>
+
+</html>
